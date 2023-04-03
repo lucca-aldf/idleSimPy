@@ -104,17 +104,3 @@ def main():
 
 if __name__ == "__main__":
         main()
-
-
-        #if not render_all:
-        #    SCREEN.blit(best_car.image, (int(best_car.pos_x), int(best_car.pos_y)))
-
-    
-        # Check to close app
-        '''
-        keys = pg.key.get_pressed()
-        if keys[pg.K_ESCAPE]:
-            running = False'''
-
-
-#grid.sort(key=lambda car: (car.fitness()), reverse=True)

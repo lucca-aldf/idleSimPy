@@ -48,8 +48,10 @@ class Player(Personagem):
 
         self.inventario = list()
 
-        self.arma = Arma()
-        self.armadura = Armadura()
+        #self.arma = Arma()
+        #self.armadura = Armadura()
+
+        self.historia = list()
 
     def gerar():
         _nome = rd.choice(NOMES_HEROIS)
@@ -58,9 +60,20 @@ class Player(Personagem):
     
         return Player(_nome[0], _vida, _dano, 18, _nome[1])
     
-    def receber_dano(self, danoRecebido):
-        self.vida -= danoRecebido
+    def receber_dano(self, _dano_recebido):
+        self.vida -= _dano_recebido
         Tracker.todos_trackers["VidaJogadorNumero"].update_valor(max(self.vida, 0))
 
         if self.vida < 0:
             self.vivo = False
+
+
+class Historia:
+
+    def __init__(self, _desc, _epico, data):
+        self.desc = _desc
+        self.epico = _epico
+        self.data = _epico
+
+    def __lt__(self, _other): # Escore
+        pass
