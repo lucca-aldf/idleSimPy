@@ -3,6 +3,7 @@ from .trackers import *
 from .display import *
 from .token import *
 import random as rd
+import math
 
 class Personagem:
 	
@@ -70,10 +71,15 @@ class Player(Personagem):
 
 class Historia:
 
-    def __init__(self, _desc, _epico, data):
+    def __init__(self, _desc, _epico, _data):
         self.desc = _desc
         self.epico = _epico
-        self.data = _epico
+        self.data = _data
 
-    def __lt__(self, _other): # Escore
-        pass
+    def __lt__(self, _other):
+        return self._escore < _other.score
+    
+    def escore(self):
+        _escore = math.log(self._epico)
+        return _escore
+

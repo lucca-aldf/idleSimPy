@@ -1,7 +1,7 @@
 from .personagens import *
 from time import sleep
 
-def quest(_personagem, _dificuldade):
+def quest(_personagem, _dificuldade, _data):
     print("Chegeui")
     passos = [("Combate", 
                _personagem,
