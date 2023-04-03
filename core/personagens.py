@@ -82,4 +82,4 @@ class Historia:
     def escore(self):
         _escore = math.log(self._epico)
         return _escore
-
+         

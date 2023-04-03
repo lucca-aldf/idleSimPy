@@ -1,8 +1,9 @@
 from .personagens import *
 from time import sleep
 
-def quest(_personagem, _dificuldade, _data):
-    print("Chegeui")
+def quest(_personagem, _dificuldade):
+    print(f"Um novo herói surge: {_personagem.nome}")
+    _personagem.historia.append(f"{_personagem.nome} saiu em uma jornada.")
     passos = [("Combate", 
                _personagem,
                max(0, _dificuldade + rd.randint(1, 3))) for i in range(rd.randint(1,6)) ]
@@ -27,7 +28,7 @@ def combate(_personagem, _inimigo):
 
     while _personagem.vida > 0 and _inimigo.vida > 0:
         sleep(0.5)
-        print(_personagem.vida)
+        print(f"{_personagem.nome} está com {_personagem.vida} pontos de vida")
 
         _inimigo.receber_dano(_personagem.get_ataque())
 
@@ -36,6 +37,7 @@ def combate(_personagem, _inimigo):
                         
     if _personagem.vida > 0:
         print(f"{_personagem.nome} matou {_inimigo.nome}")
+        _personagem.historia.append(f"{_personagem.nome} derrotou {_inimigo.nome} em um combate")
         return True
     return False
 
