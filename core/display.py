@@ -39,7 +39,8 @@ class Display:
         Display.TELA.fill((185, 110, 194))
         lista_elementos = Display.paginas[Display.pagina_atual].elementos
         for obj in lista_elementos:
-            Display.print_text(str(lista_elementos[obj].valor), lista_elementos[obj].pos)
+            if lista_elementos[obj].visivel:
+                Display.print_text(str(lista_elementos[obj].valor), lista_elementos[obj].pos)
 
         pg.display.update()
 
