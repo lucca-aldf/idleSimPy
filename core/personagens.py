@@ -27,7 +27,8 @@ class Personagem:
         return self.dano
     
     def gerar(_dificuldade):
-        
+        _dificuldade = max(0, _dificuldade)
+
         nome = rd.choice(NOMES_INIMIGOS)
         
         vida = int(16 + 8 * (_dificuldade ** 1.6))
@@ -47,6 +48,11 @@ class Player(Personagem):
         self.idade = _idade
         self.sexo = _sexo
 
+        self.dinheiro = {
+            "ouro":  0,
+            "prata": 0,
+            "cobre": 0
+        }
         self.inventario = list()
 
         #self.arma = Arma()
@@ -56,8 +62,8 @@ class Player(Personagem):
 
     def gerar():
         _nome = rd.choice(NOMES_HEROIS)
-        _vida = 180
-        _dano = 25
+        _vida = 330
+        _dano = 45
     
         return Player(_nome[0], _vida, _dano, 18, _nome[1])
     

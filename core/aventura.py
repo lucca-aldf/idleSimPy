@@ -1,19 +1,22 @@
 import threading
 from .quests import *
 
-def aventura(jogador, _dificuldade):
-    while jogador.vivo:
-        _quest_sucesso = quest(jogador, _dificuldade)
+def aventura(_jogador, _dificuldade):
+    print(_jogador)
+    while _jogador.vivo:
+        _quest_sucesso = quest(_jogador, _dificuldade)
+        print("Thread", _jogador.vivo)
         
-        if jogador.vivo and _quest_sucesso:
+        if _jogador.vivo:
             print("Quest terminada!")
 
             _dificuldade += 1
-            jogador.dano *= 1.5
-            jogador.vida_max *= 1.6
-            jogador.vida = jogador.vida_max
+            _jogador.dano *= 1.5
+            _jogador.vida_max *= 1.6
+            _jogador.vida = _jogador.vida_max
 
-            print(f"{jogador.nome} é agora nível {_dificuldade}")
+            print(f"{_jogador.nome} é agora nível {_dificuldade}")
         
         else:
-            print(f"{jogador.nome} faleceu...")
+            print(f"{_jogador.nome} faleceu...")
+            return False

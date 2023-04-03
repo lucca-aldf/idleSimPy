@@ -62,12 +62,12 @@ def main():
         dificuldade = 0
         personagem_jogador = Player.gerar()
         dict_trackers["NomeJogador"].update_valor(personagem_jogador.nome)
-
+        print("Hey")
         minha_aventura = threading.Thread(
                 target=aventura, args=(personagem_jogador, dificuldade), daemon=True)
 
         minha_aventura.start()
-        while personagem_jogador.vida > 0:
+        while personagem_jogador.vivo:
             for event in pg.event.get():
                 if event.type == pg.QUIT: # Sair do jogo 
                     pg.quit()
@@ -92,7 +92,6 @@ def main():
                 elif event.type == pg.MOUSEBUTTONDOWN:
                     # Handle mouse clicks
                     pass
-
 
             Display.update()   
             CLOCK.tick(60)
