@@ -1,33 +1,45 @@
 import pygame as pg
+from os import path
 from .trackers import *
 
 
 class Display:
     pg.init()
-
-
     pg.display.init()
-    font = pg.font.SysFont('century', 25)
-    to_render = list()
-    screen = pg.display.set_mode((480, 900))
+
+    font_path = path.join("core", "database", "fonts", "EightBitDragon-anqx.ttf")
+
+    # Load the font file
+    font = pg.font.Font(font_path, 16)
     
-    def print_text(_text, _coords, _color=(0, 0, 0)):
-        Display.screen.blit(Display.font.render(_text, False, _color),  _coords)
+    TELA = pg.display.set_mode((480, 720))
 
-    def getScreen():
-        return Display.screen
+    paginas = dict()
+    pagina_atual = ""
+    
 
-    def createTracker(_label, _tracker):
-        Tracker.all_trackers[_label] = _tracker
-        Display.to_render.append(Tracker.all_trackers[_label])
+    def __init__(self, _nome):
+        self.nome = _nome
+        self.elementos = dict()
+        Display.paginas[_nome] = self
 
-    def createElement(_element):
-        Display.to_render.append(_element)
+        if Display.pagina_atual == "":
+            Display.pagina_atual = _nome
+
+    def print_text(_text, _coords, _color=(0, 0, 0), _font=font):
+        Display.TELA.blit(Display.font.render(_text, False, _color),  _coords)
+
+    def get_tela():
+        return Display.TELA
+
+    def add_elemento(self, _chave, _elemento):
+        self.elementos[_chave] = _elemento
 
     def update():
-        Display.screen.fill((185, 110, 194))
-        for element in Display.to_render:
-            Display.print_text(str(element.valor), element.pos)
+        Display.TELA.fill((185, 110, 194))
+        lista_elementos = Display.paginas[Display.pagina_atual].elementos
+        for obj in lista_elementos:
+            Display.print_text(str(lista_elementos[obj].valor), lista_elementos[obj].pos)
 
         pg.display.update()
 

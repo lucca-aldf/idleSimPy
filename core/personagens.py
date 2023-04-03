@@ -1,12 +1,14 @@
 from .database import *
 from .trackers import *
 from .display import *
+from .token import *
 import random as rd
 
 class Personagem:
 	
     def __init__(self, _nome="", _vida="", _ataque="") -> None:
 
+        self.vivo           = True
         self.nome			= _nome
         self.vida			= _vida
         self.vida_max		= _vida
@@ -14,11 +16,13 @@ class Personagem:
 
     # Métodos
 
-    def receberDano(self, danoRecebido):
+    def receber_dano(self, danoRecebido):
         self.vida -= danoRecebido
+        if self.vida < 0:
+            self.vivo = False
 
     # Retornos
-    def getAtaque(self):
+    def get_ataque(self):
         return self.dano
     
     def gerar(_dificuldade):
@@ -42,17 +46,21 @@ class Player(Personagem):
         self.idade = _idade
         self.sexo = _sexo
 
+        self.inventario = list()
+
+        self.arma = Arma()
+        self.armadura = Armadura()
+
     def gerar():
-        
-        nome = rd.choice(NOMES_HEROIS)
-        
-        vida = 180
-        dano = 25
-        
-        
-        return Player(nome[0], vida, dano, 18, nome[1])
+        _nome = rd.choice(NOMES_HEROIS)
+        _vida = 180
+        _dano = 25
     
-    def receberDano(self, danoRecebido):
+        return Player(_nome[0], _vida, _dano, 18, _nome[1])
+    
+    def receber_dano(self, danoRecebido):
         self.vida -= danoRecebido
-        Tracker.all_trackers["VidaJogador"].updateValor(self.vida)
-        Display.update()
+        Tracker.todos_trackers["VidaJogadorNumero"].update_valor(max(self.vida, 0))
+
+        if self.vida < 0:
+            self.vivo = False
