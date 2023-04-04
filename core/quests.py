@@ -32,7 +32,7 @@ def quest(_personagem, _dificuldade, _data=0):
     
     for etapa in passos:
         resultado = passo(*etapa)
-        print(_personagem.dinheiro["cobre"])
+        
         if not resultado:
             return False
         

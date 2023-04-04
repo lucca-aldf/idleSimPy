@@ -6,7 +6,6 @@ def aventura(_jogador, _dificuldade):
     _jogador.historia.append(f"{_jogador.nome} saiu em uma jornada.")
     while _jogador.vivo:
         _quest_sucesso = quest(_jogador, _dificuldade)
-        print("Thread", _jogador.vivo)
         
         if _jogador.vivo:
             print("Quest terminada!")
