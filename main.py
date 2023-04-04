@@ -48,7 +48,12 @@ def main():
                        Tracker("NomeInimigo"        , ""                   , (130, 290)))
     tela_aventura.add_elemento("NomeJogador"        , \
                        Tracker("NomeJogador"        , "Héroi"              , (130, 320)))
-    
+
+
+    tela_historia.add_elemento("DataEvento" , \
+                        Tracker("DataEvento", "" , (40, 600)))
+    tela_historia.add_elemento("Evento"    , \
+                        Tracker("Evento"   , "" , (80, 600)))
 
     threads = list()
     running = True
@@ -62,10 +67,11 @@ def main():
         dificuldade = 0
         personagem_jogador = Player.gerar()
         dict_trackers["NomeJogador"].update_valor(personagem_jogador.nome)
-        print("Hey")
+
+        #dict_trackers["Evento"].update_valor(personagem_jogador.historia)
+
         minha_aventura = threading.Thread(
                 target=aventura, args=(personagem_jogador, dificuldade), daemon=True)
-
         minha_aventura.start()
         while personagem_jogador.vivo:
             for event in pg.event.get():

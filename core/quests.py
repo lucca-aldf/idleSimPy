@@ -82,6 +82,7 @@ def combate(_personagem, _inimigo):
                         
     if _personagem.vida > 0:
         print(f"{_personagem.nome} matou {_inimigo.nome}")
+        _personagem.historia.append(f"{_personagem.nome} derrotou {_inimigo.nome} em um combate")
         return True
     return False
 
