@@ -5,6 +5,7 @@ import threading
 import time
 import pygame as pg
 import math
+import button
 from core import *
 
 
@@ -23,6 +24,10 @@ def main():
     # Screen setting
     pg.display.gl_set_attribute(pg.GL_MULTISAMPLEBUFFERS, 0)
 
+    #load button images
+    A_img= pg.image.load('images/A.png').convert_alpha()
+    H_img= pg.image.load('images/H.png').convert_alpha()
+    C_img= pg.image.load('images/C.png').convert_alpha()
 
     # Title and Icon
     #pg.display.set_caption("gfx/Race Works")
@@ -39,6 +44,11 @@ def main():
     tela_historia = Display("HISTÓRIA")
     tela_historia = Display("PLACEHOLDER")
 
+
+    A_button= button.Button(20,20, A_img, 0.5)
+    H_button= button.Button(20,50, H_img, 0.5)
+    C_button= button.Button(20,80, C_img, 0.5)
+    
     tela_aventura.add_elemento("VidaJogadorTexto"   , \
                        Tracker("VidaJogadorTexto"   , "Vida do Personagem" , (105, 220)))
     tela_aventura.add_elemento("VidaJogadorNumero"  , \
@@ -63,6 +73,12 @@ def main():
         #CLOCK.tick(60)
         #game_tick += 1
 
+        if A_button.draw(Display.TELA):
+            print("aaa")
+        if H_button.draw(Display.TELA):
+            print("aaa")
+        if C_button.draw(Display.TELA):
+            print("aaa")
         
         dificuldade = 0
         personagem_jogador = Player.gerar()
