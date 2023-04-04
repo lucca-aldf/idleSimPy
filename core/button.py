@@ -1,7 +1,6 @@
-import pygame
-from core import *
+import pygame as pg
 
-
+'''
 class Button():
     def __init__(self, x, y, image, scale):
         width = image.get_width()
@@ -32,3 +31,4 @@ class Button():
         return action
 
 
+'''

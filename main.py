@@ -5,7 +5,7 @@ import threading
 import time
 import pygame as pg
 import math
-import button
+import core.button as button
 from core import *
 
 

@@ -1,6 +1,6 @@
 import pygame as pg
 from os import path
-from .trackers import *
+from .elementos import *
 
 
 class Display:
@@ -39,8 +39,12 @@ class Display:
         Display.TELA.fill((185, 110, 194))
         lista_elementos = Display.paginas[Display.pagina_atual].elementos
         for obj in lista_elementos:
-            if lista_elementos[obj].visivel:
-                Display.print_text(str(lista_elementos[obj].valor), lista_elementos[obj].pos)
+            if type(lista_elementos[obj]) == Tracker:
+                Display.print_text(str(lista_elementos[obj].get_valor()), lista_elementos[obj].get_pos())
+            
+            else:
+                _obj_render = lista_elementos[obj].get_render()
+                Display.TELA.blit(_obj_render, lista_elementos[obj].get_pos())
 
         pg.display.update()
 
