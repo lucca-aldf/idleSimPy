@@ -29,20 +29,18 @@ def main():
     H_img= pg.image.load('images/H.png').convert_alpha()
     C_img= pg.image.load('images/C.png').convert_alpha()
 
-    # Title and Icon
+
     #pg.display.set_caption("gfx/Race Works")
     #icon = pg.image.load("gfx/RaceWorksIcon.png")
     #pg.display.set_icon(icon)
-
-    #track = pg.image.load(f"gfx/{track_name} Mask.png")
-    #SCREEN.blit(track, (0, 0))
+    
+    
     pg.display.update()
-    GAME_TICK = 0
+
 
     dict_trackers = Tracker.todos_trackers
     tela_aventura = Display("AVENTURA")
     tela_historia = Display("HISTÓRIA")
-    tela_historia = Display("PLACEHOLDER")
 
 
     A_button= button.Button(20,20, A_img, 0.5)
@@ -60,15 +58,16 @@ def main():
                        Tracker("NomeJogador"        , "Héroi"              , (130, 320)))
 
 
-    tela_historia.add_elemento("DataEvento" , \
-                        Tracker("DataEvento", "" , (40, 600)))
-    tela_historia.add_elemento("Evento"    , \
-                        Tracker("Evento"   , "" , (80, 600)))
+    tela_historia.add_elemento("DataEvento"         , \
+                       Tracker("DataEvento"         , "" , (40, 600)))
+    tela_historia.add_elemento("Evento"             , \
+                       Tracker("Evento"             , "" , (80, 600)))
 
     threads = list()
     running = True
     Display.get_tela().fill((185, 110, 194))
 
+    data = Data()
     while running:
         #CLOCK.tick(60)
         #game_tick += 1
