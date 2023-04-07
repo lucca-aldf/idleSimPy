@@ -1,8 +1,9 @@
 from .personagens import *
+from .elementos import *
 from time import sleep
 
 
-def quest(_personagem, _dificuldade, _data=0):
+def quest(_personagem, _dificuldade, _data):
     
     TIPOS_PASSOS = ["Viagem", "Combate", "Descanso", "Busca", "Escolta", "Explorar"]
 
@@ -35,6 +36,9 @@ def quest(_personagem, _dificuldade, _data=0):
         
         if not resultado:
             return False
+    
+        _data.avancar_etapa()
+        Tracker.todos_trackers["Data"].update_valor(_data.get_data_extensa())
         
     return True
     
@@ -50,7 +54,7 @@ def passo(_passo, *args):
 def viagem(_personagem, _destino, _distancia, _dificuldade):
     print(_distancia, _dificuldade)
     while _personagem.vivo and _distancia > 0:
-        sleep(1)
+        sleep(0.1)
 
         _chance_ataque = rd.random < _dificuldade / 30
 
@@ -73,7 +77,7 @@ def combate(_personagem, _inimigo):
     Tracker.todos_trackers["NomeInimigo"].update_valor(_inimigo.nome)
 
     while _personagem.vivo and _inimigo.vivo:
-        sleep(1)
+        sleep(0.1)
 
         _inimigo.receber_dano(_personagem.get_ataque())
 

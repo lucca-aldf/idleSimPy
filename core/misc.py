@@ -46,12 +46,12 @@ class Data:
     }
 
     dia_extra = {
-        1: "Dia da Virtude",
-        2: "Dia do Engenho",
-        3: "Dia do Trabalho",
-        4: "Dia da Opinião",
-        5: "Dia das Recompensas",
-        6: "Dia da Revolução", # Anos bissextos
+        0: "Dia da Virtude",
+        1: "Dia do Engenho",
+        2: "Dia do Trabalho",
+        3: "Dia da Opinião",
+        4: "Dia das Recompensas",
+        5: "Dia da Revolução", # Anos bissextos
     }
 
     
@@ -86,10 +86,10 @@ class Data:
 
     def avancar_etapa(self, _etapas=1):
         self.tique  += _etapas
-        self.etapas += _etapas
-        if self.etapas > 7:
-            self.avancar_dia(self.etapas // 8, False)
-            self.etapas -= self.etapas // 8
+        self.etapa += _etapas
+        if self.etapa > 7:
+            self.avancar_dia(self.etapa // 8, False)
+            self.etapa -= self.etapa // 8
 
 
     def avancar_dia(self, _dias=1, _avancar_tique=True):
@@ -98,18 +98,21 @@ class Data:
         
         self.dia += _dias
 
-        while self.dia > 30:
+        while self.dia >= 30:
             while 30 <= self.dia and self.mes <= 12:
                 self.mes += 1
                 self.dia -= 30
             
-            if self.dia >= 30:
-                self.dia -= min(5 + int(self.ano % 4 == 0), self.dia - 30)
-                self.mes = 12
+            if self.dia >= 5 + int(self.ano % 4 == 0):
+                self.dia -= 5 + int(self.ano % 4 == 0)
+                self.mes = 0
+                self.ano += 1
 
-                if self.dia >= 5 + int(self.ano % 4 == 0):
-                    self.mes = 0
-                    self.ano += 1
+
+        if self.dia >= 5 + int(self.ano % 4 == 0):
+            self.dia 
+            self.mes = 0
+            self.ano += 1
 
 
     def get_data_curta(self):

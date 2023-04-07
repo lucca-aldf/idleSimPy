@@ -1,11 +1,11 @@
 import threading
 from .quests import *
 
-def aventura(_jogador, _dificuldade):
+def aventura(_jogador, _dificuldade, _data):
     print(f"Um novo herói surge: {_jogador.nome}")
     _jogador.historia.append(f"{_jogador.nome} saiu em uma jornada.")
     while _jogador.vivo:
-        _quest_sucesso = quest(_jogador, _dificuldade)
+        _quest_sucesso = quest(_jogador, _dificuldade, _data)
         
         if _jogador.vivo:
             print("Quest terminada!")
