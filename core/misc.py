@@ -109,9 +109,9 @@ class Data:
                 self.ano += 1
 
 
-        if self.dia >= 5 + int(self.ano % 4 == 0):
-            self.dia 
-            self.mes = 0
+        if self.dia >= 5 + int(self.ano % 4 == 0) and self.mes == 12:
+            self.dia -= 5 + int(self.ano % 4 == 0)
+            self.mes  = 0
             self.ano += 1
 
 
