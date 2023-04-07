@@ -16,6 +16,9 @@ class Elemento:
         else:
             self.visivel = _visibilidade
 
+    def get_render(self, *args, **kwargs):
+        return None
+
     def get_pos(self):
         return self.pos
     
@@ -34,15 +37,21 @@ class Tracker(Elemento):
     todos_trackers = dict()
 
 
-    def __init__(self, _chave, _valor, _pos):
+    def __init__(self, _chave, _valor, _tamanho_fonte, _pos, _cor=(0,0,0)):
         super().__init__(_chave, _pos)
 
-        self.valor = _valor
+        self.valor         = _valor
+        self.cor           = _cor
+        self.tamanho_fonte = _tamanho_fonte
         Tracker.todos_trackers[_chave] = self
         
 
     def update_valor(self, _novo_valor):
         self.valor = _novo_valor
+
+    def get_render(self, _font, *args, **kwargs):
+        render = _font[self.tamanho_fonte].render(str(self.valor), False, self.cor)
+        return render
     
     def get_valor(self):
         return self.valor
@@ -62,7 +71,7 @@ class Botao(Elemento):
 
         Botao.todos_botoes[_chave] = self
     
-    def get_render(self):
+    def get_render(self, *args, **kwargs):
         return self.imagem
 
 

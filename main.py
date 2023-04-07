@@ -38,7 +38,7 @@ def main():
     pg.display.update()
     
 
-    data_atual = Data()
+    data_atual = Data(_mes=11)
 
     dict_trackers = Tracker.todos_trackers
     tela_aventura = Display("AVENTURA")
@@ -50,23 +50,23 @@ def main():
     #C_button= button.Button(20,80, C_img, 0.5)
     
     tela_aventura.add_elemento("VidaJogadorTexto"   , \
-                       Tracker("VidaJogadorTexto"   , "Vida do Personagem" , (105, 220)))
+                       Tracker("VidaJogadorTexto"   , "Vida do Personagem"     , 16, (105, 220)))
     tela_aventura.add_elemento("VidaJogadorNumero"  , \
-                       Tracker("VidaJogadorNumero"  , 100                  , (105, 240)))
+                       Tracker("VidaJogadorNumero"  , 100                      , 16, (105, 240)))
     
     tela_aventura.add_elemento("NomeInimigo"        , \
-                       Tracker("NomeInimigo"        , ""                   , (130, 290)))
+                       Tracker("NomeInimigo"        , ""                       , 12, (130, 290)))
     tela_aventura.add_elemento("NomeJogador"        , \
-                       Tracker("NomeJogador"        , "Héroi"              , (130, 320)))
+                       Tracker("NomeJogador"        , "Héroi"                  , 12, (130, 320)))
     
-    tela_aventura.add_elemento("Data"        , \
-                       Tracker("Data"        , data_atual.get_data_extensa(), (0, 50)))
+    tela_aventura.add_elemento("DataAtual"          , \
+                       Tracker("DataAtual"          , data_atual.get_data_extensa(), 8, (0, 50)))
 
 
     tela_historia.add_elemento("DataEvento"         , \
-                       Tracker("DataEvento"         , "He" ,  (40, 600)))
+                       Tracker("DataEvento"         , "He" , 8, (40, 600)))
     tela_historia.add_elemento("Evento"             , \
-                       Tracker("Evento"             , "She" , (80, 600)))
+                       Tracker("Evento"             , "She" , 12, (80, 600)))
 
     threads = list()
     running = True

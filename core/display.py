@@ -10,8 +10,14 @@ class Display:
     font_path = path.join("core", "database", "fonts", "EightBitDragon-anqx.ttf")
 
     # Load the font file
-    font = pg.font.Font(font_path, 16)
+    font = {
+         8: pg.font.Font(font_path,  8),
+        12: pg.font.Font(font_path, 12),
+        16: pg.font.Font(font_path, 16),
+        20: pg.font.Font(font_path, 20),
     
+
+    }
     TELA = pg.display.set_mode((480, 720))
 
     paginas = dict()
@@ -39,14 +45,20 @@ class Display:
         Display.TELA.fill((185, 110, 194))
         lista_elementos = Display.paginas[Display.pagina_atual].elementos
         for obj in lista_elementos:
-            if type(lista_elementos[obj]) == Tracker:
-                Display.print_text(str(lista_elementos[obj].get_valor()), lista_elementos[obj].get_pos())
             
-            else:
-                _obj_render = lista_elementos[obj].get_render()
-                Display.TELA.blit(_obj_render, lista_elementos[obj].get_pos())
+            _obj_render = lista_elementos[obj].get_render(Display.font)
+            Display.TELA.blit(_obj_render, lista_elementos[obj].get_pos())
 
         pg.display.update()
+        
 
-    pg.display.update()
+class AventuraDisplay(Display):
 
+    def __init__(self, _nome):
+        super().__init__(_nome)
+
+
+class HistoriaDisplay(Display):
+
+    def __init__(self, _nome):
+        super().__init__(_nome)
