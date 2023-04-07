@@ -6,6 +6,9 @@ from .elementos import *
 class Display:
     pg.init()
     pg.display.init()
+    pg.display.gl_set_attribute(pg.GL_MULTISAMPLEBUFFERS, 0)
+
+    pg.display.set_caption("IdleSim")
 
     font_path = path.join("core", "database", "fonts", "EightBitDragon-anqx.ttf")
 

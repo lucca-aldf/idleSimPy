@@ -43,6 +43,7 @@ class Tracker(Elemento):
         self.valor         = _valor
         self.cor           = _cor
         self.tamanho_fonte = _tamanho_fonte
+        self.clicado       = False
         Tracker.todos_trackers[_chave] = self
         
 
@@ -56,41 +57,35 @@ class Tracker(Elemento):
     def get_valor(self):
         return self.valor
 
-class Botao(Elemento):
-    todos_botoes = dict()
+class Imagem(Elemento):
+    todas_imagens = dict()
 
-    def __init__(self, _chave, _imagem, _pos, _escala):
+    def __init__(self, _chave, _imagem, _escala, _pos):
         super().__init__(_chave, _pos)
 
-        largura = _imagem.get_width()
-        altura = _imagem.get_height()
-        self.imagem = pg.transform.scale(_imagem, (int(largura * _escala), int(altura + _escala)))
-        self.rect = self.imagem.get_rect()
-        self.rect.topleft= self.pos
-        self.clicado = False
 
-        Botao.todos_botoes[_chave] = self
+        self.imagem = pg.transform.scale(_imagem, (_imagem.get_width() * _escala, _imagem.get_height() *_escala))
+
+        Imagem.todas_imagens[_chave] = self
     
     def get_render(self, *args, **kwargs):
         return self.imagem
+    
+
+class Botao(Imagem):
+    todos_botoes = dict()
+
+    def __init__(self, _chave, _imagem, _escala, _pos):
+        super().__init__(_chave, _imagem, _escala, _pos)
+
+        self.rect = self.imagem.get_rect()
+        self.rect.x, self.rect.y = self.pos
+
+        Botao.todos_botoes[_chave] = self
 
 
-
-    def foo():
-        action = False
-        #get mouse position
-        pos = pg.mouse.get_pos()
-
-        #check mouseover and clicado condition
-        if self.rect.collidepoint(pos):
-            if pygame.mouse.get_pressed()[0]==1 and self.clicado == False:
-                self.clicado= True
-                action = True
-
-        if pygame.mouse.get_pressed()[0] == 0:
-            self.clicado = False
-
-        #draw button on screen
-        surface.blit(self.image, (self.rect.x,self.rect.y))
-
-        return action
+    def get_clique(self, _mouse):
+        if self.rect.collidepoint(_mouse):
+            return True
+    
+        return False

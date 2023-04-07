@@ -10,27 +10,16 @@ from core import *
 
 
 def main():
-    
-    # Initialize pygame
-
-    # Clock set-up
+    # Clock
     CLOCK = pg.time.Clock()
 
-    # Display
-
-    # Game loop
-    running = True
-
-    # Screen setting
-    pg.display.gl_set_attribute(pg.GL_MULTISAMPLEBUFFERS, 0)
 
     #load button images
-    A_img= pg.image.load('images/A.png').convert_alpha()
-    H_img= pg.image.load('images/H.png').convert_alpha()
-    C_img= pg.image.load('images/C.png').convert_alpha()
+    A_img= pg.image.load('gfx/A.png').convert_alpha()
+    H_img= pg.image.load('gfx/H.png').convert_alpha()
+    P_img= pg.image.load('gfx/C.png').convert_alpha()
 
 
-    #pg.display.set_caption("gfx/Race Works")
     #icon = pg.image.load("gfx/RaceWorksIcon.png")
     #pg.display.set_icon(icon)
     
@@ -41,14 +30,35 @@ def main():
     data_atual = Data(_mes=11)
 
     dict_trackers = Tracker.todos_trackers
-    tela_aventura = Display("AVENTURA")
-    tela_historia = Display("HISTÓRIA")
+    tela_aventura   = Display("AVENTURA")
+    tela_historia   = Display("HISTORIA")
+    tela_personagem = Display("PERSONAGEM")
 
-
-    #A_button= button.Button(20,20, A_img, 0.5)
     #H_button= button.Button(20,50, H_img, 0.5)
     #C_button= button.Button(20,80, C_img, 0.5)
     
+    
+    tela_aventura.add_elemento  ("BotaoAventura"      , \
+                        Botao   ("BotaoAventura"      ,  A_img                , 1 / 8, (  0,   0)))
+    tela_historia.add_elemento  ("BotaoAventura"      , \
+                        Botao   ("BotaoAventura"      ,  A_img                , 1 / 8, (  0,   0)))
+    tela_personagem.add_elemento("BotaoAventura"      , \
+                        Botao   ("BotaoAventura"      ,  A_img                , 1 / 8, (  0,   0)))
+    
+    tela_aventura.add_elemento  ("BotaoHistoria"      , \
+                        Botao   ("BotaoHistoria"      ,  H_img                , 1 / 8, (  0,  60)))
+    tela_historia.add_elemento  ("BotaoHistoria"      , \
+                        Botao   ("BotaoHistoria"      ,  H_img                , 1 / 8, (  0,  60)))
+    tela_personagem.add_elemento("BotaoHistoria"      , \
+                        Botao   ("BotaoHistoria"      ,  H_img                , 1 / 8, (  0,  60)))
+    
+    tela_aventura.add_elemento  ("BotaoPersonagem"    , \
+                        Botao   ("BotaoPersonagem"    ,  P_img                , 1 / 8, (  0, 120)))
+    tela_historia.add_elemento  ("BotaoPersonagem"    , \
+                        Botao   ("BotaoPersonagem"    ,  P_img                , 1 / 8, (  0, 120)))
+    tela_personagem.add_elemento("BotaoPersonagem"    , \
+                        Botao   ("BotaoPersonagem"    ,  P_img                , 1 / 8, (  0, 120)))
+
     tela_aventura.add_elemento("VidaJogadorTexto"   , \
                        Tracker("VidaJogadorTexto"   , "Vida do Personagem"     , 16, (105, 220)))
     tela_aventura.add_elemento("VidaJogadorNumero"  , \
@@ -73,16 +83,8 @@ def main():
     Display.get_tela().fill((185, 110, 194))
     threads_esperando = 0
     while running:
-        #CLOCK.tick(60)
         #game_tick += 1
 
-        '''if A_button.draw(Display.TELA):
-            print("aaa")
-        if H_button.draw(Display.TELA):
-            print("aaa")
-        if C_button.draw(Display.TELA):
-            print("aaa")'''
-        
         dificuldade = 0
         personagem_jogador = Player.gerar()
         dict_trackers["NomeJogador"].update_valor(personagem_jogador.nome)
@@ -117,8 +119,22 @@ def main():
                         
                 # Handle mouse input
                 elif event.type == pg.MOUSEBUTTONDOWN:
-                    # Handle mouse clicks
-                    pass
+                    if event.button == 1: #LMB
+                        mouse = event.pos
+                        clicados = list()
+                        for botao in Botao.todos_botoes.values():
+                            if botao.get_clique(mouse):
+                                clicados.append(botao.chave)
+                        
+                        for chave_botao in clicados:
+                            if chave_botao == "BotaoAventura":
+                                Display.pagina_atual = "AVENTURA"
+                            elif chave_botao == "BotaoHistoria":
+                                Display.pagina_atual = "HISTORIA"
+                            elif chave_botao == "BotaoPersonagem":
+                                Display.pagina_atual = "PERSONAGEM"
+                    
+
 
             Display.update()   
             CLOCK.tick(60)
