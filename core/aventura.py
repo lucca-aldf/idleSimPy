@@ -12,8 +12,8 @@ def aventura(_jogador, _dificuldade, _data):
             _jogador.historia.append(f"{_jogador.nome} terminou sua quest.")
 
             _dificuldade += 1
-            _jogador.dano *= 1.5
-            _jogador.vida_max *= 1.6
+            _jogador.dano = int(1.1 * _jogador.dano)
+            _jogador.vida_max = int(1.2 * _jogador.vida_max)
             _jogador.vida = _jogador.vida_max
 
             print(f"{_jogador.nome} é agora nível {_dificuldade}")

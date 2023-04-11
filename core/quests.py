@@ -16,7 +16,7 @@ def quest(_personagem, _dificuldade, _data):
         if _passo == "Viagem":
             passos.append((
                 rd.choice(LISTA_LUGARES),
-                _distancia := rd.randint(30,250),
+                _distancia        := rd.randint(30,250),
                 _dificuldade_real := _dificuldade - rd.randint(1,3),
             ))
 
@@ -26,7 +26,7 @@ def quest(_personagem, _dificuldade, _data):
             passos.append((
                 "Combate",
                 _personagem,
-                Personagem.gerar(_dificuldade_real := max(0, _dificuldade - rd.randint(3,5)))
+                Personagem.gerar(_dificuldade_real := max(0, _dificuldade + rd.randint(0,2)))
             ))
             
             _epico += _dificuldade_real
@@ -54,7 +54,7 @@ def passo(_passo, *args):
 def viagem(_personagem, _destino, _distancia, _dificuldade):
     print(_distancia, _dificuldade)
     while _personagem.vivo and _distancia > 0:
-        sleep(0.1)
+        sleep(1)
 
         _chance_ataque = rd.random < _dificuldade / 30
 
@@ -77,12 +77,13 @@ def combate(_personagem, _inimigo):
     Tracker.todos_trackers["NomeInimigo"].update_valor(_inimigo.nome)
 
     while _personagem.vivo and _inimigo.vivo:
-        sleep(0.1)
+        sleep(1)
 
         _inimigo.receber_dano(_personagem.get_ataque())
 
         if _inimigo.vida > 0:
             _personagem.receber_dano(_inimigo.get_ataque())
+            print(_personagem.vida)
                         
     if _personagem.vida > 0:
         print(f"{_personagem.nome} matou {_inimigo.nome}")

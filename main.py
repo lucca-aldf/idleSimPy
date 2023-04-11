@@ -51,21 +51,21 @@ def main():
         - Tracker são para strings que devem ser apresentadas na tela
         - Imagem são para elementos estáticos que renderizem uma imagem
     '''
-    tela_aventura.add_elemento  ("Background"      , \
-                        Imagem   ("Background"      ,  Back_img               , 15 / 10, (  0,   0)))
+    tela_aventura.add_elemento  ("Background"         , \
+                        Imagem   ("Background"        ,  Back_img           , 15 / 10, (  0,   0)))
     tela_aventura.add_elemento  ("BotaoAventura"      , \
-                        Botao   ("BotaoAventura"      ,  A_img                , 1 / 8, (  0,   287)))
+                        Botao   ("BotaoAventura"      ,  A_img                , 1 / 8, (  0, 287)))
     tela_historia.add_elemento  ("BotaoAventura"      , \
-                        Botao   ("BotaoAventura"      ,  A_img                , 1 / 8, (  0,   287)))
+                        Botao   ("BotaoAventura"      ,  A_img                , 1 / 8, (  0, 287)))
     tela_personagem.add_elemento("BotaoAventura"      , \
-                        Botao   ("BotaoAventura"      ,  A_img                , 1 / 8, (  0,   287)))
+                        Botao   ("BotaoAventura"      ,  A_img                , 1 / 8, (  0, 287)))
     
     tela_aventura.add_elemento  ("BotaoHistoria"      , \
-                        Botao   ("BotaoHistoria"      ,  H_img                , 1 / 8, (  0,  347)))
+                        Botao   ("BotaoHistoria"      ,  H_img                , 1 / 8, (  0, 347)))
     tela_historia.add_elemento  ("BotaoHistoria"      , \
-                        Botao   ("BotaoHistoria"      ,  H_img                , 1 / 8, (  0,  347)))
+                        Botao   ("BotaoHistoria"      ,  H_img                , 1 / 8, (  0, 347)))
     tela_personagem.add_elemento("BotaoHistoria"      , \
-                        Botao   ("BotaoHistoria"      ,  H_img                , 1 / 8, (  0,  347)))
+                        Botao   ("BotaoHistoria"      ,  H_img                , 1 / 8, (  0, 347)))
     
     tela_aventura.add_elemento  ("BotaoPersonagem"    , \
                         Botao   ("BotaoPersonagem"    ,  P_img                , 1 / 8, (  0, 407)))
@@ -74,24 +74,26 @@ def main():
     tela_personagem.add_elemento("BotaoPersonagem"    , \
                         Botao   ("BotaoPersonagem"    ,  P_img                , 1 / 8, (  0, 407)))
 
-    tela_aventura.add_elemento("VidaJogadorTexto"   , \
-                       Tracker("VidaJogadorTexto"   , "Vida do Personagem"     , 16, (145, 300)))
-    tela_aventura.add_elemento("VidaJogadorNumero"  , \
-                       Tracker("VidaJogadorNumero"  , 100                      , 16, (145, 320)))
+    tela_aventura.add_elemento("VidaJogadorTexto"     , \
+                       Tracker("VidaJogadorTexto"     , "Vida do Personagem"     , 16, (145, 300)))
+    tela_aventura.add_elemento("VidaJogadorNumero"    , \
+                       Tracker("VidaJogadorNumero"    , 100                      , 16, (145, 320)))
     
-    tela_aventura.add_elemento("NomeInimigo"        , \
-                       Tracker("NomeInimigo"        , ""                       , 12, (145, 350)))
-    tela_aventura.add_elemento("NomeJogador"        , \
-                       Tracker("NomeJogador"        , "Héroi"                  , 12, (145, 380)))
+    tela_aventura.add_elemento("NomeInimigo"          , \
+                       Tracker("NomeInimigo"          , ""                       , 16, (145, 410)))
+    tela_aventura.add_elemento("ContraTexto"          , \
+                       Tracker("ContraTexto"          , "Contra"                 , 12, (145, 390)))
+    tela_aventura.add_elemento("NomeJogador"          , \
+                       Tracker("NomeJogador"          , "Héroi"                  , 16, (145, 370)))
     
     tela_aventura.add_elemento("DataAtual"          , \
-                       Tracker("DataAtual"          , data_atual.get_data_extensa(), 8, (0, 0)))
+                       Tracker("DataAtual"          , data_atual.get_data_extensa(), 12, (0, 0)))
     
 
     tela_historia.add_elemento("DataEvento"         , \
-                       Tracker("DataEvento"         , "He" , 8, (40, 600)))
+                       Tracker("DataEvento"         , "Ola" , 8, (40, 600)))
     tela_historia.add_elemento("Evento"             , \
-                       Tracker("Evento"             , "She" , 12, (80, 600)))
+                       Tracker("Evento"             , "Professor" , 12, (80, 600)))
 
     threads = list()
     running = True

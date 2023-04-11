@@ -17,8 +17,8 @@ class Personagem:
 
     # Métodos
 
-    def receber_dano(self, danoRecebido):
-        self.vida -= danoRecebido
+    def receber_dano(self, _dano_recebido):
+        self.vida -= _dano_recebido
         if self.vida < 0:
             self.vivo = False
 
@@ -31,8 +31,8 @@ class Personagem:
 
         nome = rd.choice(NOMES_INIMIGOS)
         
-        vida = int(16 + 8 * (_dificuldade ** 1.6))
-        dano = int(10 + 5 * (_dificuldade ** 1.75))
+        vida = int(10 + 12 * (1.2 ** _dificuldade))
+        dano = int( 2 +  8 * (1.3 ** _dificuldade))
         
         
         return Personagem(nome, vida, dano)
@@ -62,14 +62,14 @@ class Player(Personagem):
 
     def gerar():
         _nome = rd.choice(NOMES_HEROIS)
-        _vida = 330
-        _dano = 45
+        _vida = 60
+        _dano = 15
     
         return Player(_nome[0], _vida, _dano, 18, _nome[1])
     
     def receber_dano(self, _dano_recebido):
         self.vida -= _dano_recebido
-        Tracker.todos_trackers["VidaJogadorNumero"].update_valor(max(self.vida, 0))
+        Tracker.todos_trackers["VidaJogadorNumero"].update_valor(f"{max(self.vida, 0)} / {self.vida_max}")
 
         if self.vida < 0:
             self.vivo = False
