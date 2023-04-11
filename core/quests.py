@@ -39,6 +39,7 @@ def quest(_personagem, _dificuldade, _data):
     
         _data.avancar_etapa()
         Tracker.todos_trackers["DataAtual"].update_valor(_data.get_data_extensa())
+        Tracker.todos_trackers["DataCurta"].update_valor(_data.get_data_curta())
         
     return True
     

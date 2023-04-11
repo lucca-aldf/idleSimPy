@@ -87,7 +87,9 @@ def main():
                        Tracker("NomeJogador"          , "Héroi"                  , 16, (145, 370)))
     
     tela_aventura.add_elemento("DataAtual"          , \
-                       Tracker("DataAtual"          , data_atual.get_data_extensa(), 12, (0, 0)))
+                       Tracker("DataAtual"          , data_atual.get_data_extensa(), 12, (2, 2)))
+    tela_aventura.add_elemento("DataCurta"          , \
+                       Tracker("DataCurta"          , data_atual.get_data_curta(), 12, (2, 22)))
     
 
     tela_historia.add_elemento("DataEvento"         , \
