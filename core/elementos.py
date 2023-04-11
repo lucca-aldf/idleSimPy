@@ -1,13 +1,15 @@
 import pygame as pg
 
+# A classe Elemento é a base para toda classe que armazena informações a serem renderizadas na GUI
 class Elemento:
+    # Elemento e suas subclasses todas possuem um dicionario que armazena todos os objetos de acordo com a chave fornecida em sua criação
     todos_elementos = dict()
 
     def __init__(self, _chave, _pos):
-        self.chave = _chave
-        self.pos = _pos
-        self.visivel = True
-        Elemento.todos_elementos[_chave] = self
+        self.chave = _chave                         # chave é utilizada para armazenar no dicionário
+        self.pos = _pos                             # pos são as coordenadas do elemento a partir do canto superior esquerdo, do elemento em relação a tela
+        self.visivel = True                         # visivel armazena se o objeto é visivel ou não
+        Elemento.todos_elementos[_chave] = self     
 
     
     def toggle_visibilidade(self, _visibilidade=None):
@@ -16,7 +18,7 @@ class Elemento:
         else:
             self.visivel = _visibilidade
 
-    def get_render(self, *args, **kwargs):
+    def get_render(self, *args, **kwargs): # Método a ser definido por subclasses
         return None
 
     def get_pos(self):

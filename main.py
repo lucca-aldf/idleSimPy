@@ -5,39 +5,51 @@ import threading
 import time
 import pygame as pg
 import math
-import core.button as button
 from core import *
 
 
 def main():
-    # Clock
+    # Clock utilizado internamente pelo PyGame
     CLOCK = pg.time.Clock()
 
 
-    #load button images
-    A_img= pg.image.load('gfx/A.png').convert_alpha()
-    H_img= pg.image.load('gfx/H.png').convert_alpha()
-    P_img= pg.image.load('gfx/C.png').convert_alpha()
+    # Variaveis para carregamento de imagens para renderização
+    A_img= pg.image.load("gfx/A.png").convert_alpha()
+    H_img= pg.image.load("gfx/H.png").convert_alpha()
+    P_img= pg.image.load("gfx/C.png").convert_alpha()
 
 
-    #icon = pg.image.load("gfx/RaceWorksIcon.png")
-    #pg.display.set_icon(icon)
+    # Icone da aba
+    icon = pg.image.load("gfx/A.png")
+    pg.display.set_icon(icon)
     
     
     pg.display.update()
     
+    # Data inicial do jogo
+    data_atual = Data(_ano = 1789, _mes=4, _dia = 10, _etapa = 4)
 
-    data_atual = Data(_mes=11)
-
+    # Armazenar pointer para dicionário que guarda todos os Trackers
     dict_trackers = Tracker.todos_trackers
+
+    # Inicialização das telas com a classe Display
     tela_aventura   = Display("AVENTURA")
     tela_historia   = Display("HISTORIA")
     tela_personagem = Display("PERSONAGEM")
-
-    #H_button= button.Button(20,50, H_img, 0.5)
-    #C_button= button.Button(20,80, C_img, 0.5)
     
+    '''
+    Criação de elementos de cada tela.
+    Para cada elemento, os primeiros a serem descritos serão renderizados primeiros, e portanto estarão ao fundo.
+    Para criar um elemento, utilizar instrução do tipo Display().add_elemento(chave, Elemento()), onde
+        - Display() é um objeto da classe Display
+        - chave é uma string (que deve ser repetida a mesma para o construtor Elemento())
+        - Elemento() é um objeto da classe Elemento ou derivado
     
+    Para saber mais sobra a classe Elemento, vide elementos.py, ou copie um dos usos abaixo
+        - Botão são para elementos que devem ser clicados
+        - Tracker são para strings que devem ser apresentadas na tela
+        - Imagem são para elementos estáticos que renderizem uma imagem
+    '''
     tela_aventura.add_elemento  ("BotaoAventura"      , \
                         Botao   ("BotaoAventura"      ,  A_img                , 1 / 8, (  0,   0)))
     tela_historia.add_elemento  ("BotaoAventura"      , \
