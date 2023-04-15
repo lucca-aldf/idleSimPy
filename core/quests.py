@@ -44,33 +44,9 @@ def quest(_personagem, _dificuldade, _data):
         
     return True
     
-
-def passo(_passo, *args):
-    if _passo == "Viagem":
-        return viagem(*args)
-
-    if _passo == "Combate":
-        return combate(*args)
-
-
-def viagem(_personagem, _destino, _distancia, _dificuldade):
-    print(_distancia, _dificuldade)
-    while _personagem.vivo and _distancia > 0:
-        sleep(1)
-
-        _chance_ataque = rd.random < _dificuldade / 30
-
-        if _chance_ataque:
-            combate(_personagem, Personagem.gerar(_dificuldade - 3))
-
-        else:
-            _personagem.dinheiro["cobre"] += rd.randint(1,10)
-
-        _distancia -= rd.randint(15, 60)
-        _distancia = max(0, _distancia)
-
-    return _personagem.vivo
-
+def busca(_personagem):
+    # Tracker.todos_trackers["Acao"].update_valor(_inimigo.nome)
+    pass
 
 def combate(_personagem, _inimigo):
     Tracker.todos_trackers["NomeInimigo"].update_valor(_inimigo.nome)
@@ -104,10 +80,27 @@ def encherVida(_personagem, _data):
 
         _personagem.vida = _personagem.vida_max
 
+def passo(_passo, *args):
+    if _passo == "Viagem":
+        return viagem(*args)
 
-def busca(_personagem):
-    # Tracker.todos_trackers["Acao"].update_valor(_inimigo.nome)
-    pass
+    if _passo == "Combate":
+        return combate(*args)
 
-def viagem(_personagem):
-    pass
+def viagem(_personagem, _destino, _distancia, _dificuldade):
+    print(_distancia, _dificuldade)
+    while _personagem.vivo and _distancia > 0:
+        sleep(1)
+
+        _chance_ataque = rd.random < _dificuldade / 30
+
+        if _chance_ataque:
+            combate(_personagem, Personagem.gerar(_dificuldade - 3))
+
+        else:
+            _personagem.dinheiro["cobre"] += rd.randint(1,10)
+
+        _distancia -= rd.randint(15, 60)
+        _distancia = max(0, _distancia)
+
+    return _personagem.vivo
