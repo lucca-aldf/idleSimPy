@@ -1,5 +1,6 @@
 from .personagens import *
 from .elementos import *
+from .misc import *
 from time import sleep
 
 
@@ -71,9 +72,6 @@ def viagem(_personagem, _destino, _distancia, _dificuldade):
     return _personagem.vivo
 
 
-        
-
-
 def combate(_personagem, _inimigo):
     Tracker.todos_trackers["NomeInimigo"].update_valor(_inimigo.nome)
 
@@ -92,11 +90,24 @@ def combate(_personagem, _inimigo):
         return True
     return False
 
+def descanso(_personagem, _dificuldade):
+    _chance_ataque = rd.random < _dificuldade / 30
+
+    while(_personagem.vivo and _chance_ataque < 1 and _personagem.vida < _personagem.vida_max):
+        sleep(1)
+
+        _personagem.vida = _personagem.vida + 1
+
+def encherVida(_personagem, _data):
+
+    while(_personagem.vivo and _personagem.vida < _personagem.vida_max and _data.etapa == "Penumbra") :
+
+        _personagem.vida = _personagem.vida_max
+
 
 def busca(_personagem):
     # Tracker.todos_trackers["Acao"].update_valor(_inimigo.nome)
     pass
-
 
 def viagem(_personagem):
     pass
