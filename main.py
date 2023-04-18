@@ -6,6 +6,7 @@ import time
 import pygame as pg
 import math
 from core import *
+from pygame.locals import *
 
 
 def main():
@@ -16,8 +17,324 @@ def main():
     # Variaveis para carregamento de imagens para renderização
     A_img= pg.image.load("gfx/A.png").convert_alpha()
     H_img= pg.image.load("gfx/H.png").convert_alpha()
-    P_img= pg.image.load("gfx/C.png").convert_alpha()
+    P_img= pg.image.load("gfx/P.png").convert_alpha()
     Back_img = pg.image.load("gfx/Back.png").convert_alpha()
+    Mapa_img = pg.image.load("gfx/mapa.jpg").convert_alpha()
+
+    # sprites herois
+    heroi1_img = pg.image.load("gfx/sprites herois/heroi1.png").convert_alpha()
+    heroi2_img = pg.image.load("gfx/sprites herois/heroi2.png").convert_alpha()
+    heroi3_img = pg.image.load("gfx/sprites herois/heroi3.png").convert_alpha()
+    heroina1_img = pg.image.load("gfx/sprites herois/heroina1.png").convert_alpha()
+    heroina2_img = pg.image.load("gfx/sprites herois/heroina2.png").convert_alpha()
+    heroina3_img = pg.image.load("gfx/sprites herois/heroina3.png").convert_alpha()
+
+    #sprites vilões
+    harpia1_img = pg.image.load("gfx/sprites monstros/hrp1.png").convert_alpha()
+    harpia2_img = pg.image.load("gfx/sprites monstros/hrp2.png").convert_alpha()
+    gesqueleto1_img = pg.image.load("gfx/sprites monstros/skeleton1.png").convert_alpha()
+    gesqueleto2_img = pg.image.load("gfx/sprites monstros/skeleton2.png").convert_alpha()
+    esqueleto1_img = pg.image.load("gfx/sprites monstros/sklt1.png").convert_alpha()
+    esqueleto2_img = pg.image.load("gfx/sprites monstros/sklt2.png").convert_alpha()
+    sereia1_img = pg.image.load("gfx/sprites monstros/sereia1.png").convert_alpha()
+    sereia2_img = pg.image.load("gfx/sprites monstros/sereia2.png").convert_alpha()
+    demonio1_img = pg.image.load("gfx/sprites monstros/dmn1.png").convert_alpha()
+    demonio2_img = pg.image.load("gfx/sprites monstros/dmn2.png").convert_alpha()
+    goblin1_img = pg.image.load("gfx/sprites monstros/gbln1.png").convert_alpha()
+    goblin2_img = pg.image.load("gfx/sprites monstros/gbln2.png").convert_alpha()
+    yeti1_img = pg.image.load("gfx/sprites monstros/yet1.png").convert_alpha()
+    yeti2_img = pg.image.load("gfx/sprites monstros/yet2.png").convert_alpha()
+    troll1_img = pg.image.load("gfx/sprites monstros/troll1.png").convert_alpha()
+    troll2_img = pg.image.load("gfx/sprites monstros/troll2.png").convert_alpha()
+    zumbi1_img = pg.image.load("gfx/sprites monstros/zmb1.png").convert_alpha()
+    zumbi2_img = pg.image.load("gfx/sprites monstros/zmb2.png").convert_alpha()
+    fantasma1_img = pg.image.load("gfx/sprites monstros/gst1.png").convert_alpha()
+    fantasma2_img = pg.image.load("gfx/sprites monstros/gst2.png").convert_alpha()
+    gigante1_img = pg.image.load("gfx/sprites monstros/gnt1.png").convert_alpha()
+    gigante2_img = pg.image.load("gfx/sprites monstros/gnt2.png").convert_alpha()
+    aranha1_img = pg.image.load("gfx/sprites monstros/arnh1.png").convert_alpha()
+    aranha2_img = pg.image.load("gfx/sprites monstros/arnh2.png").convert_alpha()
+    golem1_img = pg.image.load("gfx/sprites monstros/glm1.png").convert_alpha()
+    golem2_img = pg.image.load("gfx/sprites monstros/glm2.png").convert_alpha()
+    fera1_img = pg.image.load("gfx/sprites monstros/lobo1.png").convert_alpha()
+    fera2_img = pg.image.load("gfx/sprites monstros/lobo2.png").convert_alpha()
+    sapo1_img = pg.image.load("gfx/sprites monstros/sapo1.png").convert_alpha()
+    sapo2_img = pg.image.load("gfx/sprites monstros/sapo2.png").convert_alpha()
+
+    #herois
+    class Heroi(pg.sprite.Sprite):
+        def __init__(self):
+            pg.sprite.Sprite.__init__(self)
+            self.sprites = []
+            self.sprites.append(heroi1_img)
+            self.sprites.append(heroi2_img) 
+            self.sprites.append(heroi3_img)
+
+            self.atual = 0
+            self.image = self.sprites[self.atual]
+
+            self.rect = self.image.get_rect()
+            self.rect.center= 100, 100
+
+
+    class Heroina(pg.sprite.Sprite):
+        def __init__(self):
+            pg.sprite.Sprite.__init__(self)
+            self.sprites = []
+            self.sprites.append(heroina1_img)
+            self.sprites.append(heroina2_img) 
+            self.sprites.append(heroina3_img)
+
+            self.atual = 0
+            self.image = self.sprites[self.atual]
+
+            self.rect = self.image.get_rect()
+            self.rect.center= 100, 100
+
+    sprites_herois = pg.sprite.Group()
+    heroi= Heroi()
+    heroina= Heroina()
+    sprites_herois.add(heroi, heroina)
+
+
+
+    ##inimigos 
+    class Sapo(pg.sprite.Sprite):
+        def __init__(self):
+            pg.sprite.Sprite.__init__(self)
+            self.sprites = []
+            self.sprites.append(sapo1_img)
+            self.sprites.append(sapo2_img)
+
+            self.atual = 0
+            self.image = self.sprites[self.atual]
+
+            self.rect = self.image.get_rect()
+            self.rect.center = 100, 100
+
+
+    class Demonio(pg.sprite.Sprite):
+        def __init__(self):
+            pg.sprite.Sprite.__init__(self)
+            self.sprites = []
+            self.sprites.append(demonio1_img)
+            self.sprites.append(demonio2_img)
+
+            self.atual = 0
+            self.image = self.sprites[self.atual]
+
+            self.rect = self.image.get_rect()
+            self.rect.center = 100, 100
+
+
+    class Aranha(pg.sprite.Sprite):
+        def __init__(self):
+            pg.sprite.Sprite.__init__(self)
+            self.sprites = []
+            self.sprites.append(aranha1_img)
+            self.sprites.append(aranha2_img)
+
+            self.atual = 0
+            self.image = self.sprites[self.atual]
+
+            self.rect = self.image.get_rect()
+            self.rect.center = 100, 100
+
+
+    class Esqueleto(pg.sprite.Sprite):
+        def __init__(self):
+            pg.sprite.Sprite.__init__(self)
+            self.sprites = []
+            self.sprites.append(esqueleto1_img)
+            self.sprites.append(esqueleto2_img)
+
+            self.atual = 0
+            self.image = self.sprites[self.atual]
+
+            self.rect = self.image.get_rect()
+            self.rect.center = 100, 100
+
+
+    class Harpia(pg.sprite.Sprite):
+        def __init__(self):
+            pg.sprite.Sprite.__init__(self)
+            self.sprites = []
+            self.sprites.append(harpia1_img)
+            self.sprites.append(harpia2_img)
+
+            self.atual = 0
+            self.image = self.sprites[self.atual]
+
+            self.rect = self.image.get_rect()
+            self.rect.center = 100, 100
+
+
+    class Lobo(pg.sprite.Sprite):
+        def __init__(self):
+            pg.sprite.Sprite.__init__(self)
+            self.sprites = []
+            self.sprites.append(fera1_img)
+            self.sprites.append(fera2_img)
+
+            self.atual = 0
+            self.image = self.sprites[self.atual]
+
+            self.rect = self.image.get_rect()
+            self.rect.center = 100, 100
+
+
+    class Golem(pg.sprite.Sprite):
+        def __init__(self):
+            pg.sprite.Sprite.__init__(self)
+            self.sprites = []
+            self.sprites.append(golem1_img)
+            self.sprites.append(golem2_img)
+
+            self.atual = 0
+            self.image = self.sprites[self.atual]
+
+            self.rect = self.image.get_rect()
+            self.rect.center = 100, 100
+
+
+    class Troll(pg.sprite.Sprite):
+        def __init__(self):
+            pg.sprite.Sprite.__init__(self)
+            self.sprites = []
+            self.sprites.append(troll1_img)
+            self.sprites.append(troll2_img)
+
+            self.atual = 0
+            self.image = self.sprites[self.atual]
+
+            self.rect = self.image.get_rect()
+            self.rect.center = 100, 100
+
+
+    class Yeti(pg.sprite.Sprite):
+        def __init__(self):
+            pg.sprite.Sprite.__init__(self)
+            self.sprites = []
+            self.sprites.append(yeti1_img)
+            self.sprites.append(yeti2_img)
+
+            self.atual = 0
+            self.image = self.sprites[self.atual]
+
+            self.rect = self.image.get_rect()
+            self.rect.center = 100, 100
+
+
+    class Gesqueleto(pg.sprite.Sprite):
+        def __init__(self):
+            pg.sprite.Sprite.__init__(self)
+            self.sprites = []
+            self.sprites.append(gesqueleto1_img)
+            self.sprites.append(gesqueleto2_img)
+
+            self.atual = 0
+            self.image = self.sprites[self.atual]
+
+            self.rect = self.image.get_rect()
+            self.rect.center = 100, 100
+
+    
+    class Sereia(pg.sprite.Sprite):
+        def __init__(self):
+            pg.sprite.Sprite.__init__(self)
+            self.sprites = []
+            self.sprites.append(sereia1_img)
+            self.sprites.append(sereia2_img)
+
+            self.atual = 0
+            self.image = self.sprites[self.atual]
+
+            self.rect = self.image.get_rect()
+            self.rect.center = 100, 100
+
+
+    class Goblin(pg.sprite.Sprite):
+        def __init__(self):
+            pg.sprite.Sprite.__init__(self)
+            self.sprites = []
+            self.sprites.append(goblin1_img)
+            self.sprites.append(goblin2_img)
+
+            self.atual = 0
+            self.image = self.sprites[self.atual]
+
+            self.rect = self.image.get_rect()
+            self.rect.center = 100, 100
+
+
+    class Zumbi(pg.sprite.Sprite):
+        def __init__(self):
+            pg.sprite.Sprite.__init__(self)
+            self.sprites = []
+            self.sprites.append(zumbi1_img)
+            self.sprites.append(zumbi2_img)
+
+            self.atual = 0
+            self.image = self.sprites[self.atual]
+
+            self.rect = self.image.get_rect()
+            self.rect.center = 100, 100
+
+
+    class Fantasma(pg.sprite.Sprite):
+        def __init__(self):
+            pg.sprite.Sprite.__init__(self)
+            self.sprites = []
+            self.sprites.append(fantasma1_img)
+            self.sprites.append(fantasma2_img)
+
+            self.atual = 0
+            self.image = self.sprites[self.atual]
+
+            self.rect = self.image.get_rect()
+            self.rect.center = 100, 100
+
+
+    class Gigante(pg.sprite.Sprite):
+        def __init__(self):
+            pg.sprite.Sprite.__init__(self)
+            self.sprites = []
+            self.sprites.append(gigante1_img)
+            self.sprites.append(gigante2_img)
+
+            self.atual = 0
+            self.image = self.sprites[self.atual]
+
+            self.rect = self.image.get_rect()
+            self.rect.center = 100, 100
+
+
+    sprites_monstros = pg.sprite.Group()
+
+    demonio_das_sombras = Demonio()
+    espectro_devorador = Fantasma()
+    golem_de_gelo = Golem()
+    harpia_voadora = Harpia()
+    esqueleto_amaldicoado = Esqueleto()
+    troll_enfurecido = Troll()
+    aberracao_das_trevas = Gigante()
+    fada_obiscura = Harpia()
+    espectro_sinistro = Fantasma()
+    goblin_andarilho = Goblin()
+    aranha_mistica = Aranha()
+    aranha_mortifera = Aranha()
+    ogro_vermelho = Gigante()
+    sapo_feroz = Sapo()
+    fera_gigante = Lobo()
+    sereia_encantadora = Sereia()
+    troll_de_pedra = Troll()
+    lobo_devorador = Lobo()
+    guerreiro_esqueleto = Gesqueleto()
+    zumbi_frenetico = Zumbi()
+
+
+    sprites_monstros.add(demonio_das_sombras, espectro_devorador, golem_de_gelo, harpia_voadora, esqueleto_amaldicoado, troll_enfurecido, aberracao_das_trevas, fada_obiscura, espectro_sinistro, goblin_andarilho, aranha_mistica, aranha_mortifera, ogro_vermelho, sapo_feroz, fera_gigante, sereia_encantadora, troll_de_pedra, lobo_devorador, guerreiro_esqueleto, zumbi_frenetico)
+
 
 
     # Icone da aba
@@ -53,6 +370,17 @@ def main():
     '''
     tela_aventura.add_elemento  ("Background"         , \
                         Imagem   ("Background"        ,  Back_img           , 15 / 10, (  0,   0)))
+    tela_historia.add_elemento  ("Background"         , \
+                        Imagem   ("Background"        ,  Mapa_img           , 1 / 1, (  0,   0)))
+    tela_personagem.add_elemento  ("Background"         , \
+                        Imagem   ("Background"        ,  Mapa_img           , 1 / 1, (  0,   0)))
+    
+   
+    
+
+
+
+
     tela_aventura.add_elemento  ("BotaoAventura"      , \
                         Botao   ("BotaoAventura"      ,  A_img                , 1 / 8, (  0, 287)))
     tela_historia.add_elemento  ("BotaoAventura"      , \
@@ -92,10 +420,11 @@ def main():
                        Tracker("DataCurta"          , data_atual.get_data_curta(), 12, (2, 22)))
     
 
-    tela_historia.add_elemento("DataEvento"         , \
-                       Tracker("DataEvento"         , "Ola" , 8, (40, 600)))
-    tela_historia.add_elemento("Evento"             , \
-                       Tracker("Evento"             , "Professor" , 12, (80, 600)))
+    
+    #tela_historia.add_elemento("DataEvento"         , \
+     #                  Tracker("DataEvento"         , "Ola" , 8, (40, 600)))
+    #tela_historia.add_elemento("Evento"             , \
+     #                  Tracker("Evento"             , "Professor" , 12, (80, 600)))
 
     threads = list()
     running = True
