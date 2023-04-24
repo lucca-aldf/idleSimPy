@@ -44,6 +44,10 @@ class Display:
     def add_elemento(self, _chave, _elemento):
         self.elementos[_chave] = _elemento
 
+    def rmv_elemento(self, chave):
+        if chave in self.elementos:
+            del self.elementos[chave]
+            
     def update():
         Display.TELA.fill((185, 110, 194))
         lista_elementos = Display.paginas[Display.pagina_atual].elementos

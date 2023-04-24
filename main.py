@@ -13,13 +13,23 @@ def main():
     # Clock utilizado internamente pelo PyGame
     CLOCK = pg.time.Clock()
 
+    #Variavel de carregamento de musica
+    pg.mixer.music.load("gfx/music.mpga")
+
 
     # Variaveis para carregamento de imagens para renderização
     A_img= pg.image.load("gfx/A.png").convert_alpha()
     H_img= pg.image.load("gfx/H.png").convert_alpha()
     P_img= pg.image.load("gfx/P.png").convert_alpha()
-    Back_img = pg.image.load("gfx/Back.png").convert_alpha()
+    floresta_img = pg.image.load("gfx/Back.png").convert_alpha()
     Mapa_img = pg.image.load("gfx/mapa.jpg").convert_alpha()
+    castelo_img = pg.image.load("gfx/castelo.jpg").convert_alpha()
+    caverna_img = pg.image.load("gfx/caverna.jpg").convert_alpha()
+    deserto_img = pg.image.load("gfx/Deserto.jpg").convert()
+    fcongelada_img = pg.image.load("gfx/floresta congelada.jpg").convert_alpha()
+    praia_img = pg.image.load("gfx/praia.jpg").convert_alpha()
+
+
 
     # sprites herois
     heroi1_img = pg.image.load("gfx/sprites herois/heroi1.png").convert_alpha()
@@ -61,7 +71,7 @@ def main():
     sapo1_img = pg.image.load("gfx/sprites monstros/sapo1.png").convert_alpha()
     sapo2_img = pg.image.load("gfx/sprites monstros/sapo2.png").convert_alpha()
 
-    #herois
+    """#herois
     class Heroi(pg.sprite.Sprite):
         def __init__(self):
             pg.sprite.Sprite.__init__(self)
@@ -74,8 +84,8 @@ def main():
             self.image = self.sprites[self.atual]
 
             self.rect = self.image.get_rect()
-            self.rect.center= 100, 100
-
+            self.rect.bottomleft= 100, 100
+ 
 
     class Heroina(pg.sprite.Sprite):
         def __init__(self):
@@ -89,14 +99,18 @@ def main():
             self.image = self.sprites[self.atual]
 
             self.rect = self.image.get_rect()
-            self.rect.center= 100, 100
+            self.rect.bottomleft= 100, 100
 
-    sprites_herois = pg.sprite.Group()
+        
+        def update(self):
+            self.atual = (self.atual + 1) % len(self.sprites)
+            self.image = self.sprites[self.atual]
+
     heroi= Heroi()
     heroina= Heroina()
-    sprites_herois.add(heroi, heroina)
+    
 
-
+    
 
     ##inimigos 
     class Sapo(pg.sprite.Sprite):
@@ -110,7 +124,7 @@ def main():
             self.image = self.sprites[self.atual]
 
             self.rect = self.image.get_rect()
-            self.rect.center = 100, 100
+            self.rect.bottomleft = 100, 100
 
 
     class Demonio(pg.sprite.Sprite):
@@ -124,7 +138,7 @@ def main():
             self.image = self.sprites[self.atual]
 
             self.rect = self.image.get_rect()
-            self.rect.center = 100, 100
+            self.rect.bottomleft = 100, 100
 
 
     class Aranha(pg.sprite.Sprite):
@@ -138,7 +152,7 @@ def main():
             self.image = self.sprites[self.atual]
 
             self.rect = self.image.get_rect()
-            self.rect.center = 100, 100
+            self.rect.bottomleft = 100, 100
 
 
     class Esqueleto(pg.sprite.Sprite):
@@ -152,7 +166,7 @@ def main():
             self.image = self.sprites[self.atual]
 
             self.rect = self.image.get_rect()
-            self.rect.center = 100, 100
+            self.rect.bottomleft = 100, 100
 
 
     class Harpia(pg.sprite.Sprite):
@@ -166,7 +180,7 @@ def main():
             self.image = self.sprites[self.atual]
 
             self.rect = self.image.get_rect()
-            self.rect.center = 100, 100
+            self.rect.bottomleft = 100, 100
 
 
     class Lobo(pg.sprite.Sprite):
@@ -180,7 +194,7 @@ def main():
             self.image = self.sprites[self.atual]
 
             self.rect = self.image.get_rect()
-            self.rect.center = 100, 100
+            self.rect.bottomleft = 100, 100
 
 
     class Golem(pg.sprite.Sprite):
@@ -194,7 +208,7 @@ def main():
             self.image = self.sprites[self.atual]
 
             self.rect = self.image.get_rect()
-            self.rect.center = 100, 100
+            self.rect.bottomleft = 100, 100
 
 
     class Troll(pg.sprite.Sprite):
@@ -208,7 +222,7 @@ def main():
             self.image = self.sprites[self.atual]
 
             self.rect = self.image.get_rect()
-            self.rect.center = 100, 100
+            self.rect.bottomleft = 100, 100
 
 
     class Yeti(pg.sprite.Sprite):
@@ -222,7 +236,7 @@ def main():
             self.image = self.sprites[self.atual]
 
             self.rect = self.image.get_rect()
-            self.rect.center = 100, 100
+            self.rect.bottomleft = 100, 100
 
 
     class Gesqueleto(pg.sprite.Sprite):
@@ -236,7 +250,7 @@ def main():
             self.image = self.sprites[self.atual]
 
             self.rect = self.image.get_rect()
-            self.rect.center = 100, 100
+            self.rect.bottomleft = 100, 100
 
     
     class Sereia(pg.sprite.Sprite):
@@ -250,7 +264,7 @@ def main():
             self.image = self.sprites[self.atual]
 
             self.rect = self.image.get_rect()
-            self.rect.center = 100, 100
+            self.rect.bottomleft = 100, 100
 
 
     class Goblin(pg.sprite.Sprite):
@@ -264,7 +278,7 @@ def main():
             self.image = self.sprites[self.atual]
 
             self.rect = self.image.get_rect()
-            self.rect.center = 100, 100
+            self.rect.bottomleft = 100, 100
 
 
     class Zumbi(pg.sprite.Sprite):
@@ -278,7 +292,7 @@ def main():
             self.image = self.sprites[self.atual]
 
             self.rect = self.image.get_rect()
-            self.rect.center = 100, 100
+            self.rect.bottomleft = 100, 100
 
 
     class Fantasma(pg.sprite.Sprite):
@@ -292,7 +306,7 @@ def main():
             self.image = self.sprites[self.atual]
 
             self.rect = self.image.get_rect()
-            self.rect.center = 100, 100
+            self.rect.bottomleft = 100, 100
 
 
     class Gigante(pg.sprite.Sprite):
@@ -306,7 +320,7 @@ def main():
             self.image = self.sprites[self.atual]
 
             self.rect = self.image.get_rect()
-            self.rect.center = 100, 100
+            self.rect.bottomleft = 100, 100
 
 
     sprites_monstros = pg.sprite.Group()
@@ -336,7 +350,7 @@ def main():
     sprites_monstros.add(demonio_das_sombras, espectro_devorador, golem_de_gelo, harpia_voadora, esqueleto_amaldicoado, troll_enfurecido, aberracao_das_trevas, fada_obiscura, espectro_sinistro, goblin_andarilho, aranha_mistica, aranha_mortifera, ogro_vermelho, sapo_feroz, fera_gigante, sereia_encantadora, troll_de_pedra, lobo_devorador, guerreiro_esqueleto, zumbi_frenetico)
 
 
-
+"""
     # Icone da aba
     icon = pg.image.load("gfx/A.png")
     pg.display.set_icon(icon)
@@ -369,17 +383,11 @@ def main():
         - Imagem são para elementos estáticos que renderizem uma imagem
     '''
     tela_aventura.add_elemento  ("Background"         , \
-                        Imagem   ("Background"        ,  Back_img           , 15 / 10, (  0,   0)))
+                        Imagem   ("Background"        ,  floresta_img           , 15 / 10, (  0,   0)))
     tela_historia.add_elemento  ("Background"         , \
                         Imagem   ("Background"        ,  Mapa_img           , 1 / 1, (  0,   0)))
     tela_personagem.add_elemento  ("Background"         , \
                         Imagem   ("Background"        ,  Mapa_img           , 1 / 1, (  0,   0)))
-    
-   
-    
-
-
-
 
     tela_aventura.add_elemento  ("BotaoAventura"      , \
                         Botao   ("BotaoAventura"      ,  A_img                , 1 / 8, (  0, 287)))
@@ -419,12 +427,15 @@ def main():
     tela_aventura.add_elemento("DataCurta"          , \
                        Tracker("DataCurta"          , data_atual.get_data_curta(), 12, (2, 22)))
     
-
+    pg.mixer.music.play(-1)
     
     #tela_historia.add_elemento("DataEvento"         , \
      #                  Tracker("DataEvento"         , "Ola" , 8, (40, 600)))
     #tela_historia.add_elemento("Evento"             , \
      #                  Tracker("Evento"             , "Professor" , 12, (80, 600)))
+
+
+
 
     threads = list()
     running = True
@@ -436,6 +447,20 @@ def main():
         dificuldade = 0
         personagem_jogador = Player.gerar()
         dict_trackers["NomeJogador"].update_valor(personagem_jogador.nome)
+
+
+
+        if personagem_jogador.sexo == 'Feminino' :
+           tela_aventura.add_elemento  ("herois"         , \
+                Imagem   ("heroina"        ,  heroina1_img          , 2/1, (  90,   180)))   
+           
+                             
+        if personagem_jogador.sexo == 'Masculino' :
+            tela_aventura.add_elemento  ("herois"         , \
+                Imagem   ("heroi"        ,  heroi1_img          , 2/1, (  90,   180))) 
+
+
+
 
         #dict_trackers["Evento"].update_valor(personagem_jogador.historia)
 
@@ -486,6 +511,14 @@ def main():
 
             Display.update()   
             CLOCK.tick(60)
+        tela_aventura.rmv_elemento ( "herois" )
+
+        
+        """heroina.update()
+        heroina_image=heroina.image
+        heroina_rect=heroina.rect
+
+        tela_aventura.blit(heroina_image, heroina_rect)"""
                         
              
             

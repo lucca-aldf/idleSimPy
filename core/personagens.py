@@ -75,6 +75,11 @@ class Player(Personagem):
             self.vivo = False
 
 
+#class Sprites(Imagem):
+    #def __init__(self, _chave, _imagem, _escala, _pos):
+
+
+
 class Historia:
 
     def __init__(self, _desc, _epico, _data):
