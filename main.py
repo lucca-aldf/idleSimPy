@@ -511,7 +511,7 @@ def main():
 
             Display.update()   
             CLOCK.tick(60)
-        tela_aventura.rmv_elemento ( "herois" )
+        tela_aventura.rmv_elemento("herois")
 
         
         """heroina.update()

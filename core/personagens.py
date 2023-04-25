@@ -4,6 +4,7 @@ from .display import *
 from .token import *
 import random as rd
 import math
+from numpy import prod
 
 class Personagem:
 	
@@ -31,7 +32,7 @@ class Personagem:
 
         nome = rd.choice(NOMES_INIMIGOS)
         
-        vida = int(10 + 12 * (1.2 ** _dificuldade))
+        vida = int(10 + prod([rd.randint(8,15) for _ in range(int(1.2 ** _dificuldade))]))
         dano = int( 2 +  8 * (1.3 ** _dificuldade))
         
         
@@ -62,8 +63,8 @@ class Player(Personagem):
 
     def gerar():
         _nome = rd.choice(NOMES_HEROIS)
-        _vida = 60
-        _dano = 15
+        _vida = rd.randint(50,80)
+        _dano = rd.randint(9,20)
     
         return Player(_nome[0], _vida, _dano, 18, _nome[1])
     
