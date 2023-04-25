@@ -58,10 +58,10 @@ def combate(_personagem, _inimigo):
 
         if _inimigo.vida > 0:
             _personagem.receber_dano(_inimigo.get_ataque())
-            print(_personagem.vida)
+            #print(_personagem.vida)
                         
     if _personagem.vida > 0:
-        print(f"{_personagem.nome} matou {_inimigo.nome}")
+        #print(f"{_personagem.nome} matou {_inimigo.nome}")
         _personagem.historia.append(f"{_personagem.nome} derrotou {_inimigo.nome} em um combate")
         return True
     return False
@@ -88,7 +88,7 @@ def passo(_passo, *args):
         return combate(*args)
 
 def viagem(_personagem, _destino, _distancia, _dificuldade):
-    print(_distancia, _dificuldade)
+    #print(_distancia, _dificuldade)
     while _personagem.vivo and _distancia > 0:
         sleep(1)
 
