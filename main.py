@@ -507,13 +507,18 @@ def main():
                             elif chave_botao == "BotaoPersonagem":
                                 Display.pagina_atual = "PERSONAGEM"
             #display historia
-            tela_historia.add_elemento("HistoriaJogador"     , \
-                       Tracker("HistoriaJogador"     , personagem_jogador.historia     , 8, (145, 300)))        
+            for i in range(min(25,len(personagem_jogador.historia))):
+                tela_historia.add_elemento(f"HistoriaJogador{i}"     , \
+                       Tracker(f"HistoriaJogador{i}"     , personagem_jogador.historia[i]     , 8, (145, 300+15*i)))        
 
 
             Display.update()   
             CLOCK.tick(60)
         tela_aventura.rmv_elemento("herois")
+        for i in range(min(25,len(personagem_jogador.historia))):
+            tela_historia.add_elemento(f"HistoriaJogador{i}"     , \
+                       Tracker(f"HistoriaJogador{i}"     ,  ''     , 8, (145, 300+15*i)))        
+
 
         
         """heroina.update()
