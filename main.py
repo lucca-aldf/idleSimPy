@@ -506,7 +506,9 @@ def main():
                                 Display.pagina_atual = "HISTORIA"
                             elif chave_botao == "BotaoPersonagem":
                                 Display.pagina_atual = "PERSONAGEM"
-                    
+            #display historia
+            tela_historia.add_elemento("HistoriaJogador"     , \
+                       Tracker("HistoriaJogador"     , personagem_jogador.historia     , 8, (145, 300)))        
 
 
             Display.update()   

@@ -67,5 +67,7 @@ class AventuraDisplay(Display):
 
 class HistoriaDisplay(Display):
 
-    def __init__(self, _nome):
-        super().__init__(_nome)
+    def generate(_jogador):
+        for i in _jogador.historia:
+            for j in i:
+                return (j)   

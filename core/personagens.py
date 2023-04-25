@@ -42,11 +42,13 @@ class Player(Personagem):
     casa = rd.choice(NOMES_CASAS).split()[-1]
 
     
-    def __init__(self, _nome, _vida, _ataque, _idade, _sexo):
+    def __init__(self, _nome, _vida, _ataque, _idade, _sexo, _historia):
         super().__init__(_nome, _vida, _ataque)
         self.nome = self.nome + " da casa " + Player.casa
         self.idade = _idade
         self.sexo = _sexo
+        self.historia = _historia
+        #self.historia = list()
 
         self.dinheiro = {
             "ouro":  0,
@@ -58,14 +60,14 @@ class Player(Personagem):
         #self.arma = Arma()
         #self.armadura = Armadura()
 
-        self.historia = list()
 
     def gerar():
         _nome = rd.choice(NOMES_HEROIS)
         _vida = 60
         _dano = 15
+        _historia = []
     
-        return Player(_nome[0], _vida, _dano, 18, _nome[1])
+        return Player(_nome[0], _vida, _dano, 18, _nome[1], _historia)
     
     def receber_dano(self, _dano_recebido):
         self.vida -= _dano_recebido
@@ -80,17 +82,4 @@ class Player(Personagem):
 
 
 
-class Historia:
-
-    def __init__(self, _desc, _epico, _data):
-        self.desc = _desc
-        self.epico = _epico
-        self.data = _data
-
-    def __lt__(self, _other):
-        return self._escore < _other.score
-    
-    def escore(self):
-        _escore = math.log(self._epico)
-        return _escore
          
