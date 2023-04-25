@@ -23,4 +23,4 @@ def aventura(_jogador, _dificuldade, _data):
             #print(f"{_jogador.nome} faleceu...")
             _jogador.historia.append(f"{_jogador.nome} foi derrotado em combate.")
             _jogador.historia.append(f"Esse é o fim da história de {_jogador.nome}")
-    print(_jogador.historia)
+    #print(_jogador.historia)

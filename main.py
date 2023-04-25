@@ -441,9 +441,10 @@ def main():
     running = True
     Display.get_tela().fill((185, 110, 194))
     threads_esperando = 0
+    qtd_herois = -1
     while running:
+        qtd_herois += 1
         #game_tick += 1
-
         dificuldade = 0
         personagem_jogador = Player.gerar()
         dict_trackers["NomeJogador"].update_valor(personagem_jogador.nome)
@@ -469,7 +470,6 @@ def main():
         threads.append(minha_aventura)
         minha_aventura.start()
         while personagem_jogador.vivo:
-
             for event in pg.event.get():
                 if event.type == pg.QUIT: # Sair do jogo 
                     pg.quit()
@@ -509,7 +509,7 @@ def main():
             #display historia
             for i in range(min(25,len(personagem_jogador.historia))):
                 tela_historia.add_elemento(f"HistoriaJogador{i}"     , \
-                       Tracker(f"HistoriaJogador{i}"     , personagem_jogador.historia[i]     , 8, (145, 300+15*i)))        
+                       Tracker(f"HistoriaJogador{i}"     , personagem_jogador.historia[i]     , 10, (100, 310+15*i)))        
 
 
             Display.update()   
@@ -517,9 +517,10 @@ def main():
         tela_aventura.rmv_elemento("herois")
         for i in range(min(25,len(personagem_jogador.historia))):
             tela_historia.add_elemento(f"HistoriaJogador{i}"     , \
-                       Tracker(f"HistoriaJogador{i}"     ,  ''     , 8, (145, 300+15*i)))        
+                       Tracker(f"HistoriaJogador{i}"     ,  ''     , 10, (100,+15*i)))        
 
-
+        tela_personagem.add_elemento(f"AntigosJogadores{qtd_herois}"     , \
+                       Tracker(f"AntigosJogadores{qtd_herois}"    ,f"{personagem_jogador.nome} caiu em {data_atual.get_data_curta()}"     , 10, (100, 310+15*qtd_herois)))       
         
         """heroina.update()
         heroina_image=heroina.image

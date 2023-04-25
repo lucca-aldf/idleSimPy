@@ -15,6 +15,7 @@ class Display:
     # Load the font file
     font = {
          8: pg.font.Font(font_path,  8),
+        10: pg.font.Font(font_path, 10),
         12: pg.font.Font(font_path, 12),
         16: pg.font.Font(font_path, 16),
         20: pg.font.Font(font_path, 20),
